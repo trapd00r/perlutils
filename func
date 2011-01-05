@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 # List all functions defined in ./**.{pl,pm}
+use vars qw($VERSION);
+$VERSION = '0.004';
 
 use strict;
 use Term::ExtendedColor;
