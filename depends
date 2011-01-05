@@ -8,11 +8,18 @@ use Term::ExtendedColor;
 
 my $dir = ( shift // '.' );
 
-my $ff = File::Find::Rule->new;
-$ff->file;
-$ff->name('*.pm', '*.pl');
+my @perls;
+if(-f $dir) {
+  push(@ARGV, $dir);
+  @perls = map { -f $_ && $_ } @ARGV;
+}
+else {
+  my $ff = File::Find::Rule->new;
+  $ff->file;
+  $ff->name('*.pm', '*.pl');
+  @perls = grep{!/blib/ } $ff->in( $dir );
+}
 
-my @perls = grep{!/blib/ } $ff->in( $dir );
 
 
 @perls or print "No Perl files found.\n" and exit;
