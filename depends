@@ -1,0 +1,59 @@
+#!/usr/bin/perl
+# depends - list dependencies for Perl modules/scripts, with core info
+
+use strict;
+use File::Find::Rule;
+use Module::CoreList;
+use Term::ExtendedColor;
+
+my $dir = ( shift // '.' );
+
+my $ff = File::Find::Rule->new;
+$ff->file;
+$ff->name('*.pm', '*.pl');
+
+my @perls = grep{!/blib/ } $ff->in( $dir );
+
+
+@perls or print "No Perl files found.\n" and exit;
+
+my %result = %{ get_modules(@perls) };
+
+my $previous;
+for my $file(sort(keys(%result))) {
+  if($previous ne $file) {
+    $previous = $file;
+    print "\n";
+  }
+
+  for my $module(@{$result{$file}}) {
+    my ($in_core) = Module::CoreList->find_modules($module);
+    if($in_core) {
+      printf("%15.15s %25.25s (%s)\n",
+        $file,
+        $module,
+        fg('blue4', Module::CoreList->first_release_by_date($module))
+      );
+      next;
+    }
+    printf("%15.15s %25.25s\n", $file, $module);
+  }
+}
+
+
+sub get_modules {
+  my @files = @_;
+
+  my %used_modules;
+
+  for my $file(@files) {
+    open(my $fh, '<', $file) or die($!);
+    $file =~ s|.+/(.+)$|$1|;
+    while(chomp(my $line = <$fh>)) {
+      if( $line =~ m/\s*(?:use|require)\s+(\S+);/ ) {
+        push(@{ $used_modules{$file} }, $1);
+      }
+    }
+  }
+  return \%used_modules;
+}
