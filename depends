@@ -7,7 +7,7 @@ $VERSION = '0.004';
 use strict;
 use File::Find::Rule;
 use Module::CoreList;
-use Term::ExtendedColor;
+use Term::ExtendedColor qw(fg);
 
 my $dir = ( shift // '.' );
 

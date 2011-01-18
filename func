@@ -4,7 +4,7 @@ use vars qw($VERSION);
 $VERSION = '0.004';
 
 use strict;
-use Term::ExtendedColor;
+use Term::ExtendedColor qw(fg);
 use File::Find::Rule;
 use Cwd 'abs_path';
 
