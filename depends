@@ -39,14 +39,14 @@ for my $file(sort(keys(%result))) {
   for my $module(@{$result{$file}}) {
     my ($in_core) = Module::CoreList->find_modules($module);
     if($in_core) {
-      printf("%15.15s %25.25s (%s)\n",
+      printf("%15.15s %s (%s)\n",
         $file,
         $module,
         fg('blue4', Module::CoreList->first_release_by_date($module))
       );
       next;
     }
-    printf("%15.15s %25.25s\n", $file, $module);
+    printf("%15.15s %s\n", $file, $module);
   }
 }
 
