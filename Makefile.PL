@@ -14,6 +14,7 @@ WriteMakefile(
       'depends',
       'func',
       'version',
+      'findinc',
 
     ],
 
