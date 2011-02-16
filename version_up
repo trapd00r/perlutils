@@ -1,0 +1,22 @@
+#!/usr/bin/perl
+use strict;
+use Tie::File;
+
+
+my $file = shift or die 'File?';
+
+tie(my @ver, 'Tie::File', $file) or die("Cant tie $file: $!\n");
+
+my $version = $ver[0];
+my($old) = $version =~ m{version ([0-9.-_]+)}i;
+print "Version string: [ $version ] \n";
+print "  Bump version number to: ";
+chomp(my $new = <STDIN>);
+$version =~ s{\Q$old\E}{$new};
+
+$ver[0] = $version;
+print "    Version bumped to $new\n";
+print "    Version string is now $ver[0]\n";
+
+
+untie(@ver) or die("Cant untie $file: $!\n");
