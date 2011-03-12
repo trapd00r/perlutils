@@ -1,22 +1,55 @@
 #!/usr/bin/perl
+# 1 UP!
+
 use strict;
 use Tie::File;
+use Cwd qw(abs_path);
+
+our $VERSION = '0.016';
 
 
-my $file = shift or die 'File?';
+{
+  no strict;
+  $SIG{__DIE__} = sub { untie( @ver ) };
+}
+
+my $file;
+$file = shift or do {
+  print "No file given - should I operate on myself? [y/N] ";
+  chomp(my $destiny = <>);
+  if(lc($destiny) ne 'y') {
+    die("Bailing out...\n");
+  }
+  $file = abs_path( $0 );
+};
+
+warn "Trying to bump $file VERSION...\n";
 
 tie(my @ver, 'Tie::File', $file) or die("Cant tie $file: $!\n");
 
-my $version = $ver[0];
-my($old) = $version =~ m{version ([0-9.-_]+)}i;
-print "Version string: [ $version ] \n";
-print "  Bump version number to: ";
-chomp(my $new = <STDIN>);
-$version =~ s{\Q$old\E}{$new};
+my($version, $pre, $post, $i) = ( (undef) x 3, 0 );
+for my $l(@ver) {
+  if($l =~ m{ (.+VERSION\s*=\s*['"]?)(.+)(['"].+) }x) {
+    ($pre, $version, $post) = ($1, $2, $3);
 
-$ver[0] = $version;
+    warn "Current VERSION determined as $version\n";
+    warn "Pre is [[$pre]] and Post is [[$post]]\n";
+    last;
+  }
+  $i++;
+}
+
+
+print ">  Bump version number to: ";
+chomp(my $new = <STDIN>);
+
+if($new !~ /[0-9]/) {
+  die("Please be sensitive, I can not accept a version _number_ like this.\n");
+}
+
+$ver[$i] = "$pre$new$post";  # our $VERSION = '0.004';
 print "    Version bumped to $new\n";
-print "    Version string is now $ver[0]\n";
+print "    Statement changed to $pre$new$post\n";
 
 
 untie(@ver) or die("Cant untie $file: $!\n");
