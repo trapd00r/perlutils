@@ -2,7 +2,7 @@
 # abstract: list dependencies for perl modules/scripts, with core info
 
 use vars qw($VERSION);
-our $VERSION = '0.012';
+our $VERSION = '0.014';
 
 use strict;
 use File::Find::Rule;
