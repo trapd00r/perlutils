@@ -1,7 +1,7 @@
 package App::perlutils; 
 use strict;
 
-our $VERSION = '0.024';
+our $VERSION = '0.026';
 
 
 1;
@@ -10,6 +10,7 @@ our $VERSION = '0.024';
 
 
 __END__
+
 
 =pod
 
