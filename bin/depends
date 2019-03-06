@@ -27,7 +27,7 @@ elsif(-f $file) {
 if(!@perls) {
   my $ff = File::Find::Rule->new;
   $ff->file;
-  @perls = grep{!/blib/ } $ff->in( '.' );
+  @perls = grep{!/(?:blib|[.]git)/ } $ff->in( '.' );
   @perls = grep{ MagicFile($_) =~ m/perl/i } @perls;
 }
 
