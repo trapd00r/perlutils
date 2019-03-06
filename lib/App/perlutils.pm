@@ -15,27 +15,37 @@ __END__
 
 =head1 NAME
 
-=head1 SYNOPSIS
+App::perlutils - utils for perl development
 
 =head1 DESCRIPTION
 
-=head1 EXPORTS
+A few useful utilities for perl developers.
 
-None by default.
+=head1 SCRIPTS
 
-=head1 FUNCTIONS
+=head2 depends
 
-=head2 foo()
+list dependencies for perl modules or scripts, with core info.
 
-=over 4
+=head2 findinc
 
-=item    Arguments: $string
+list all files in @INC. With LS_COLORS!
 
-=item Return value: \%hash
+=head2 func
 
-=back
+list all functions defined in **/*.p[lm]
 
-Description.
+=head2 methods
+
+TODO
+
+=head2 version
+
+get VERSION info from a perl module
+
+=head2 version_up
+
+bump $VERSION.
 
 =head1 REPORTING BUGS
 
