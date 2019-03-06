@@ -1,0 +1,8 @@
+Makefile.PL
+bin/depends
+bin/findinc
+bin/func
+bin/methods
+bin/version
+bin/version_up
+MANIFEST
