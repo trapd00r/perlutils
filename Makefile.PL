@@ -32,7 +32,7 @@ WriteMakefile1(
   META_ADD                     => {
     provides => {
       'App::perlutils' => {
-        file => 'bin/depends',
+        file => 'lib/App/perlutils.pm',
       },
     },
   },
