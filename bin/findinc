@@ -1,2 +1,2 @@
 #!/bin/sh
-find $(perl -E 'say for sort @INC' | perl -pe 's/\n/ /')
+find $(perl -E 'say for sort @INC' | perl -pe 's/\n/ /') | ls_color
