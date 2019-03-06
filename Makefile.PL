@@ -18,7 +18,7 @@ WriteMakefile1(
   NAME                         => q{App::perlutils},
   AUTHOR                       => q{Magnus Woldrich <m@japh.se>},
   ABSTRACT                     => q{utils for perl development},
-  VERSION_FROM                 => q{bin/depends},
+  VERSION_FROM                 => q{lib/App/perlutils.pm},
   LICENSE                      => q{perl},
   EXE_FILES                    => [
     glob("bin/*"),

@@ -6,3 +6,4 @@ bin/methods
 bin/version
 bin/version_up
 MANIFEST
+lib/App/perlutils.pm
