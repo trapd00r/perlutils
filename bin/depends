@@ -1,8 +1,8 @@
 #!/usr/bin/perl
-# abstract: list dependencies for perl modules/scripts, with core info
+# abstract: list dependencies for perl modules/scripts, with optional core info
 
 use vars qw($VERSION);
-our $VERSION = '0.014';
+our $VERSION = '0.016';
 
 use strict;
 use File::Find::Rule;
@@ -10,6 +10,20 @@ use File::LibMagic ':easy';
 use Module::CoreList;
 use Term::ExtendedColor qw(fg);
 use File::LsColor qw(ls_color);
+use Getopt::Long;
+
+my %opt = (
+  core => 0,
+);
+
+GetOptions(
+  'c|core' => \$opt{core},
+  'h|help' => sub {
+    print "-c,  --core    also list core modules\n";
+    print "-h,  --help    display this help and exit\n";
+    exit;
+  },
+);
 
 my $file = shift;
 
@@ -45,7 +59,7 @@ for my $file(sort(keys(%result))) {
 
   for my $module(@{$result{$file}}) {
     my ($in_core) = Module::CoreList->find_modules($module);
-    if($in_core) {
+    if($in_core and $opt{core}) {
       printf("%s %s (perl v%s)\n",
         ls_color($file),
         $module,

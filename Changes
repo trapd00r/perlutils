@@ -1,0 +1,6 @@
+0.030 2021-06-19
+  - depends: Add --core flag to make listing of core modules optional.
+    Useful for piping to cpanm.
+
+0.001 2011-01-05
+  - Initial release.

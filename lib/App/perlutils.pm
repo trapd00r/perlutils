@@ -1,7 +1,7 @@
 package App::perlutils; 
 use strict;
 
-our $VERSION = '0.028';
+our $VERSION = '0.030';
 
 
 1;
@@ -26,7 +26,7 @@ A few useful utilities for perl developers.
 
 =head2 depends
 
-list dependencies for perl modules or scripts, with core info.
+list dependencies for perl modules or scripts, with optional core info.
 
 =head2 findinc
 
