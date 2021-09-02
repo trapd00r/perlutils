@@ -1,7 +1,7 @@
 package App::perlutils;
 use strict;
 
-our $VERSION = '0.034';
+our $VERSION = '0.036';
 
 
 1;
